@@ -47,20 +47,18 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        .logo-placeholder {
-            width: 80px;
-            height: 80px;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
+        /* Profile Image Styling */
+        .logo-image {
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            /* object-fit: cover ensures the image fills the circle without stretching, 
+               acting as the largest inscribable circle */
+            object-fit: cover; 
+            display: block;
             margin: 0 auto 1.5rem auto;
-            font-size: 2rem;
-            font-style: italic;
-            font-weight: bold;
-            letter-spacing: -1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+            border: 2px solid var(--border-color); /* Matches the archival aesthetic */
         }
 
         h1 {
@@ -242,7 +240,8 @@
     <div class="container">
         <!-- Header -->
         <header>
-            <div class="logo-placeholder">DD</div>
+            <!-- Replaced DD circle with dp.jpg -->
+            <img src="dp.jpg" alt="Deterrence Dialectics" class="logo-image">
             <h1>Deterrence Dialectics</h1>
         </header>
 
