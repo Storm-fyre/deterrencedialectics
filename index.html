@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deterrence Dialectics</title>
+    <style>
+        /* CSS Variables for Archival Theme */
+        :root {
+            --bg-color: #F9F8F4;
+            --text-color: #2D2C2A;
+            --accent-color: #6A2128;
+            --accent-hover: #4C161C;
+            --border-color: #DCD6C8;
+            --font-stack: 'Georgia', 'Merriweather', 'Lora', serif;
+        }
+
+        /* Base Resets & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-stack);
+            font-size: 19px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: #F2EFE8;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #3A3835;
+        }
+
+        /* Article List */
+        .article-list {
+            list-style: none;
+        }
+
+        .article-list-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .article-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-link {
+            background: none;
+            border: none;
+            text-align: left;
+            font-family: var(--font-stack);
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s ease;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .article-link:hover, .article-link:focus {
+            text-decoration-color: var(--accent-color);
+            outline: none;
+        }
+
+        .article-meta {
+            font-size: 0.95rem;
+            color: #5A5855;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Reading View */
+        .hidden {
+            display: none !important;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-family: var(--font-stack);
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        .article-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .article-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            font-weight: normal;
+        }
+
+        .article-content {
+            text-align: left;
+        }
+
+        .article-content p {
+            margin-bottom: 1.8rem;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Loading & Error States */
+        .loading {
+            font-style: italic;
+            color: #5A5855;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .error-box {
+            background-color: #FDF1F1;
+            border-left: 4px solid #C83E4D;
+            padding: 1.5rem;
+            color: #8C1C26;
+            margin-bottom: 2rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+                font-size: 12pt;
+                line-height: 1.5;
+                max-width: 100%;
+            }
+            
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .no-print, .back-btn, header {
+                display: none !important;
+            }
+
+            .about-section {
+                border: 1px solid #000;
+                background: none;
+                color: #000;
+            }
+
+            h1, h2, h3, p, span, div {
+                color: #000 !important;
+            }
+
+            .article-content p {
+                text-align: justify;
+                orphans: 3;
+                widows: 3;
+                margin-bottom: 1.2em;
+            }
+
+            .article-header {
+                margin-top: 0;
+                text-align: left;
+                border-bottom: 2px solid #000;
+                padding-bottom: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .article-header h2 {
+                font-size: 24pt;
+            }
+
+            @page { margin: 2.5cm; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-placeholder">DD</div>
+            <h1>Deterrence Dialectics</h1>
+        </header>
+
+        <main id="app">
+            <!-- Home View -->
+            <div id="home-view">
+                <div class="about-section">
+                    An analytical ledger tracing the past, present, and future of nuclear strategy. Exploring global arms control, Asian geopolitics, and Indian deterrence doctrine.
+                </div>
+                <ul class="article-list" id="article-list" aria-label="List of blog articles">
+                    <!-- Articles injected via JS -->
+                </ul>
+            </div>
+
+            <!-- Article Reading View -->
+            <article id="article-view" class="hidden">
+                <button class="back-btn no-print" id="back-btn" aria-label="Go back to articles list">
+                    &larr; Back to Articles
+                </button>
+                
+                <div class="article-header">
+                    <h2 id="reading-title"></h2>
+                    <span class="article-meta" id="reading-date"></span>
+                </div>
+
+                <div id="article-content" class="article-content">
+                    <!-- Fetched content goes here -->
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <script>
+        // CMS: Data Array mapping to the text files
+        const articles =[
+            { 
+                title: "The Deterrence Dilemma: Navigating Multipolar Nuclearity", 
+                date: "March 2026", 
+                file: "deterrence-dilemma.txt" 
+            },
+            { 
+                title: "Asian Geopolitics and the End of Strategic Ambiguity", 
+                date: "February 2026", 
+                file: "asian-geopolitics.txt" 
+            },
+            { 
+                title: "Doctrinal Shifts: India's No First Use Policy in the 21st Century", 
+                date: "January 2026", 
+                file: "doctrinal-shifts.txt" 
+            }
+        ];
+
+        // DOM Elements
+        const homeView = document.getElementById('home-view');
+        const articleView = document.getElementById('article-view');
+        const articleListEl = document.getElementById('article-list');
+        const backBtn = document.getElementById('back-btn');
+        
+        const readingTitleEl = document.getElementById('reading-title');
+        const readingDateEl = document.getElementById('reading-date');
+        const articleContentEl = document.getElementById('article-content');
+
+        function init() {
+            renderArticleList();
+            backBtn.addEventListener('click', goHome);
+        }
+
+        function renderArticleList() {
+            articleListEl.innerHTML = ''; 
+            
+            articles.forEach((article, index) => {
+                const li = document.createElement('li');
+                li.className = 'article-list-item';
+                
+                const btn = document.createElement('button');
+                btn.className = 'article-link';
+                btn.textContent = article.title;
+                btn.onclick = () => openArticle(index);
+                
+                const meta = document.createElement('div');
+                meta.className = 'article-meta';
+                meta.textContent = article.date;
+                
+                li.appendChild(btn);
+                li.appendChild(meta);
+                articleListEl.appendChild(li);
+            });
+        }
+
+        function openArticle(index) {
+            const article = articles[index];
+            
+            homeView.classList.add('hidden');
+            articleView.classList.remove('hidden');
+            
+            readingTitleEl.textContent = article.title;
+            readingDateEl.textContent = article.date;
+            
+            fetchArticleData(article.file);
+            window.scrollTo(0, 0);
+        }
+
+        async function fetchArticleData(filename) {
+            articleContentEl.innerHTML = '<div class="loading">Retrieving document from archives...</div>';
+            
+            try {
+                const response = await fetch(`blogs/${filename}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Document unavailable (Status: ${response.status})`);
+                }
+                
+                const textData = await response.text();
+                
+                // Splits text by double newlines (\n\n) to create paragraph chunks
+                const paragraphsHTML = textData
+                    .split(/\n\s*\n/)
+                    .map(chunk => chunk.trim())
+                    .filter(chunk => chunk.length > 0)
+                    .map(chunk => `<p>${chunk}</p>`)
+                    .join('');
+                    
+                if (!paragraphsHTML) {
+                    articleContentEl.innerHTML = '<div class="error-box">This document is currently blank.</div>';
+                    return;
+                }
+
+                articleContentEl.innerHTML = paragraphsHTML;
+                
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                articleContentEl.innerHTML = `
+                    <div class="error-box">
+                        <strong>Unable to retrieve document.</strong><br>
+                        The requested file (<em>${filename}</em>) could not be located in the archives. Please ensure you are running a local server and the file exists within the <code>blogs/</code> directory.
+                    </div>`;
+            }
+        }
+
+        function goHome() {
+            articleView.classList.add('hidden');
+            homeView.classList.remove('hidden');
+            articleContentEl.innerHTML = '';
+            window.scrollTo(0, 0);
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
